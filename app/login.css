@@ -1,0 +1,156 @@
+:root {
+  /* Replace these with the exact Ignite QMS branding hex codes */
+  --ignite-primary: #f97316; 
+  --ignite-primary-hover: #ea580c;
+  --ignite-bg: #0a0a0a;
+  --ignite-card: #111111;
+  --ignite-border: #1f2937;
+  --ignite-text: #ffffff;
+  --ignite-muted: #9ca3af;
+}
+
+/* --- Layout & Card --- */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  background-color: var(--ignite-bg);
+  box-sizing: border-box;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 28rem;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  background-color: var(--ignite-card);
+  border: 1px solid var(--ignite-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+/* --- Header & Branding --- */
+.login-header {
+  text-align: center;
+}
+
+.brand-icon {
+  margin: 0 auto 1rem auto;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ignite-primary);
+}
+
+.icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: #ffffff;
+}
+
+.brand-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ignite-text);
+  margin: 0;
+}
+
+.brand-subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--ignite-muted);
+}
+
+/* --- Form Elements --- */
+.login-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.75rem;
+  height: 1.25rem;
+  width: 1.25rem;
+  color: var(--ignite-muted);
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ignite-bg);
+  border: 1px solid var(--ignite-border);
+  color: var(--ignite-text);
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-input::placeholder {
+  color: #4b5563; /* Darker gray for placeholders */
+}
+
+.form-input:focus {
+  border-color: var(--ignite-primary);
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2); 
+}
+
+/* --- Buttons --- */
+.submit-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: var(--ignite-primary);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+  background-color: var(--ignite-primary-hover);
+}
+.error-message {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+}
+
+/* --- Accessibility --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
