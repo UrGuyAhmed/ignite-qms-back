@@ -1,23 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, Mail } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import './login.css';
+import { useRouter } from "next/navigation";
+import { FiMail, FiLock } from "react-icons/fi";
+import { FiZap } from "react-icons/fi";
+import "./login.css";
 
-export default function AdminLogin() {
-  const router = useRouter();
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setLoading(true);
-
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
 
     try {
       const res = await fetch("/api/login", {
@@ -26,47 +25,41 @@ export default function AdminLogin() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        setError(data.error || "Login failed");
-        setLoading(false);
+        setError("Invalid credentials");
         return;
       }
 
       router.push("/dashboard");
-    } catch (err) {
-      setError("Something went wrong. Try again.");
+    } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
     <div className="login-wrapper">
       <div className="login-card">
-        
         <div className="login-header">
           <div className="brand-icon">
-            <Lock className="icon" />
+            <FiZap className="icon" />
           </div>
-          <h2 className="brand-title">IGNITE CMS</h2>
-          <p className="brand-subtitle">Sign in to access the dashboard</p>
+          <h1 className="brand-title">IGNITE QMS</h1>
+          <p className="brand-subtitle">Sign in to manage site content</p>
         </div>
 
-        <form className="login-form" onSubmit={handleSubmit}>
-          
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="email-address" className="sr-only">Email address</label>
+            <label htmlFor="email" className="sr-only">Email</label>
             <div className="input-wrapper">
-              <Mail className="input-icon" />
+              <FiMail className="input-icon" />
               <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
+                id="email"
                 className="form-input"
-                placeholder="example@example.com"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -74,25 +67,24 @@ export default function AdminLogin() {
           <div className="form-group">
             <label htmlFor="password" className="sr-only">Password</label>
             <div className="input-wrapper">
-              <Lock className="input-icon" />
+              <FiLock className="input-icon" />
               <input
                 id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
                 className="form-input"
-                placeholder="••••••••"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
           </div>
 
           {error && <p className="error-message">{error}</p>}
 
-          <button type="submit" className="login-button" disabled={loading}>
-            {loading ? "Signing in..." : "Sign In"}
+          <button className="submit-btn" type="submit" disabled={loading}>
+            {loading ? "Signing in..." : "Log in"}
           </button>
-          
         </form>
       </div>
     </div>
